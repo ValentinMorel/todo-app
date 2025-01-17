@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-      <title>ToDo list</title>
-  </head>
-  <body>
-      <h1>Tasks</h1>
-      <u1>
+<head>
+    <title>Task List</title>
+</head>
+<body>
+    <h1>Task List</h1>
+    <ul>
         {% for task in tasks %}
-            <li> {{ task }} </li>
+            <li>
+                <form method="post" action="{{ path('task_index') }}" style="display: inline;">
+                    <input type="hidden" name="task_id" value="{{ task.id }}">
+                    <input type="checkbox" name="isCompleted" onchange="this.form.submit()" {{ task.isCompleted ? 'checked' : '' }}>
+                    {{ task.name }}
+                </form>
+            </li>
         {% endfor %}
-      </u1>
-  </body>
+    </ul>
+</body>
 </html>
